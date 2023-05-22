@@ -15,7 +15,6 @@ public class CardComponent : MonoBehaviour
     private Transform previousParent;
     private CardsColumn previousColumn;
     private Vector3 positionBeforeDrag;
-    private Vector3 dragPoint;
     private bool shownState;
 
     private void Start()
@@ -58,7 +57,7 @@ public class CardComponent : MonoBehaviour
             canvas.worldCamera, 
             out position);
 
-        transform.position = canvas.transform.TransformPoint(position) + dragPoint;
+        transform.position = canvas.transform.TransformPoint(position);
     }
 
     public void DropHandler(BaseEventData data)
@@ -102,8 +101,6 @@ public class CardComponent : MonoBehaviour
         }
 
         PointerEventData pointerData = (PointerEventData)data;
-
-        dragPoint = transform.position - new Vector3(pointerData.position.x, pointerData.position.y, 0);
 
         previousColumn = transform.parent.GetComponent<CardsColumn>();    
 
